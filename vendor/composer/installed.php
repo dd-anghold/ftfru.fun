@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '8d451eff491a40b6be704a37f4d04c9dc111204b',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -404,9 +404,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '8d451eff491a40b6be704a37f4d04c9dc111204b',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -617,9 +617,9 @@
             'dev_requirement' => false,
         ),
         'orchid/platform' => array(
-            'pretty_version' => '14.37.0',
-            'version' => '14.37.0.0',
-            'reference' => '98889b0dce751a6a178a230bed2535e6bab020e0',
+            'pretty_version' => '14.38.0',
+            'version' => '14.38.0.0',
+            'reference' => 'cc8897943fdea2f404e04783582dd0c1edaa0c25',
             'type' => 'library',
             'install_path' => __DIR__ . '/../orchid/platform',
             'aliases' => array(),
@@ -817,8 +817,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
