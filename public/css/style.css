@@ -1,0 +1,32 @@
+.content {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "main"
+        "footer";
+    min-height: 100vh;
+    padding-left: 11rem;
+    position: relative;
+    transition: ease-in-out padding 0.3s;
+}
+
+.content > main.main-container--fullheight {
+    height: calc(100vh - 2 * 3rem);
+}
+.content > main {
+    box-sizing: border-box;
+    grid-area: main;
+    min-width: 0;
+}
+.bots-overview {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+}
+.main-container {
+    height: 100%;
+    overflow: auto;
+    padding: 1em;
+}
