@@ -12,6 +12,9 @@ const fetchPlayerData = async () => {
     try {
         const response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=39EA90A863FC233C9868C29FF3591B68&steamids=${usePage().props.playerData}`, {
             method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
         });
 
         // Проверяем, успешен ли ответ

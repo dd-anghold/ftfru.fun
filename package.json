@@ -28,6 +28,7 @@
         "@inertiajs/vue3": "^1.2.0",
         "@vitejs/plugin-vue": "^5.1.4",
         "cors": "^2.8.5",
+        "cors-anywhere": "^0.4.4",
         "express": "^4.21.1",
         "ovenplayer-vue3": "^1.0.0-beta.2",
         "pinia": "^2.2.4",

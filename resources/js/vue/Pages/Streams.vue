@@ -16,8 +16,10 @@ const fetchData = async () => {
             method: 'GET',
             headers: {
                 'Authorization': `Basic ${token}`,
-                'Accept': 'application/json' // Indicate that the client expects a JSON response
-            }
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*' // Add CORS header
+            },
+            mode: 'cors' // Explicitly set CORS mode
         });
         // Check if the response is successful
         if (!response.ok) {
