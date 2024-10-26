@@ -92,7 +92,7 @@ Route::screen('ids/{ids}/edit', idsEditScreen::class)
     ->name('platform.systems.ids.edit')
     ->breadcrumbs(fn(Trail $trail, $ids) => $trail
         ->parent('platform.systems.ids')
-        ->push($ids->streamid, route('platform.systems.ids.edit', $ids)));
+        ->push($ids->id, route('platform.systems.ids.edit', $id)));
 
 
 // Platform > System > ID's > Create

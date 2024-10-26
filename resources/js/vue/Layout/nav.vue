@@ -13,16 +13,16 @@ import { Link } from '@inertiajs/vue3';
             <span class="navigation-link__icon">
                 <i class="fa-brands fa-steam"></i>
             </span>
-            <span class="navigation-link__name">Steam</span>
+            <span class="navigation-link__name">Активность</span>
             </Link>
-            <Link :href="route('streams')"
+            <!-- <Link :href="route('streams')"
                 class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
                 data-inertia="true">
             <span class="navigation-link__icon">
                 <i class="fa-solid fa-video"></i>
             </span>
             <span class="navigation-link__name">Stream</span>
-            </Link>
+            </Link> -->
             <a href="https://admin.ftfru.fun"
                 class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
                 data-inertia="true">

@@ -2,10 +2,14 @@
 import navigation from '../Layout/nav.vue'
 
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { usePage, Head } from '@inertiajs/vue3';
+import { usePage, Head, Link } from '@inertiajs/vue3';
 
 // Определяем реактивное свойство playerData
 const playerData = ref([]);
+const username = 'root';
+const password = '02092506dD';
+const token = btoa(`${username}:${password}`);
+const responseData = ref({});
 
 // Функция для получения данных игрока
 const fetchPlayerData = async () => {
@@ -37,13 +41,40 @@ const fetchPlayerData = async () => {
     }
 };
 
+const fetchData = async () => {
+    try {
+        const response = await fetch('/streamapi/', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Basic ${token}`,
+                'Accept': 'application/json'
+            },
+            mode: 'cors' // Explicitly set CORS mode
+        });
+
+        // Check if the response is successful
+        if (!response.ok) {
+            throw new Error('HTTP error ' + response.status);
+        }
+
+        const data = await response.json(); // Parse the JSON response
+        responseData.value = data.response || {}; // Ensure it's an object
+        Check.value = true;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
+
 // Получаем данные игрока при монтировании компонента
 onMounted(() => {
     fetchPlayerData(); // Первоначальная загрузка данных
-    const intervalId = setInterval(fetchPlayerData, 5000);
+    const intervalId = setInterval(fetchPlayerData, 7500);
+    const streamInfo = setInterval(fetchData, 7500);
 
     onBeforeUnmount(() => {
         clearInterval(intervalId);
+        clearInterval(streamInfo);
     });
 });
 
@@ -77,11 +108,11 @@ const getStatusTextEng = (status) => {
 </script>
 
 <template>
-
     <Head>
         <title>Актив стима</title>
     </Head>
     <section class="content">
+
         <main class="main-container main-container--fullheight bots-overview">
             <h1 class="overview__title">Активность стима</h1>
             <div class="bots">
@@ -102,6 +133,16 @@ const getStatusTextEng = (status) => {
                                     </template>
                                 </span>
                             </div>
+                            <div class="stream_action">
+                                <template v-if="Object.values(responseData).includes(player.steamid)">
+                                    <Link :href="route('stream', player.steamid)">
+                                        <i class="fa-solid fa-play"></i>
+                                    </Link>
+                                </template>
+                                <template v-else>
+                                    <i class="fa-solid fa-stop"></i>
+                                </template>
+                            </div>
                         </div>
                     </a>
                 </template>
@@ -113,7 +154,6 @@ const getStatusTextEng = (status) => {
 </template>
 
 <style lang="scss">
-
 .bots {
     display: grid;
     grid-gap: 1em;
@@ -127,11 +167,20 @@ const getStatusTextEng = (status) => {
         text-decoration: none;
     }
 
+    .stream_action {
+        align-items: center;
+        display: flex;
+        grid-area: buttons;
+        justify-content: space-around;
+        font-size: 1.5em;
+        color: rgb(30, 48, 80);
+    }
+
     .bot {
         background: #222;
         border-radius: 0 0 4px 4px;
         display: grid;
-        grid-template-areas: "avatar meta";
+        grid-template-areas: "avatar meta buttons";
         grid-template-columns: min-content 1fr;
         padding: .5em;
         transition: border .3s;

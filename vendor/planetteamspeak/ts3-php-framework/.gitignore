@@ -1,0 +1,20 @@
+# Configuration files
+.ts3config/*
+!.ts3config/*.dist
+
+# Build related
+build/
+.php_cs.cache
+.phpunit.result.cache
+php-cs-fixer.cache
+
+# OS-specific
+.DS_Store
+
+# Composer libraries
+composer.lock 
+vendor/
+
+# Intellij project files
+.idea
+*.iml
