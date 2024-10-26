@@ -68,6 +68,7 @@ const fetchData = async () => {
 // Получаем данные игрока при монтировании компонента
 onMounted(() => {
     fetchPlayerData(); // Первоначальная загрузка данных
+    fetchData();
     const intervalId = setInterval(fetchPlayerData, 7500);
     const streamInfo = setInterval(fetchData, 7500);
 
@@ -107,6 +108,7 @@ const getStatusTextEng = (status) => {
 </script>
 
 <template>
+
     <Head>
         <title>Актив стима</title>
     </Head>
@@ -135,11 +137,8 @@ const getStatusTextEng = (status) => {
                             <div class="stream_action">
                                 <template v-if="Object.values(responseData).includes(player.steamid)">
                                     <Link :href="route('stream', player.steamid)">
-                                        <i class="fa-solid fa-play"></i>
+                                    <i class="fa-solid fa-play"></i>
                                     </Link>
-                                </template>
-                                <template v-else>
-                                    <i class="fa-solid fa-stop"></i>
                                 </template>
                             </div>
                         </div>
@@ -172,6 +171,10 @@ const getStatusTextEng = (status) => {
         grid-area: buttons;
         justify-content: space-around;
         font-size: 1.5em;
+
+    }
+
+    .stream_action i:hover {
         color: rgb(80, 132, 223);
     }
 

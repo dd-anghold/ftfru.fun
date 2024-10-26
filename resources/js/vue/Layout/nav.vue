@@ -11,7 +11,7 @@ import { Link } from '@inertiajs/vue3';
                 class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
                 data-inertia="true">
             <span class="navigation-link__icon">
-                <i class="fa-brands fa-steam"></i>
+                <i class="fa-solid fa-window-restore"></i>
             </span>
             <span class="navigation-link__name">Активность</span>
             </Link>

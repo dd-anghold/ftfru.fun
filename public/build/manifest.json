@@ -3,8 +3,8 @@
     "file": "css/nav.Bj4GZeps.css",
     "src": "_nav.vue_vue_type_style_index_0_lang.!~{006}~.js"
   },
-  "_nav.vue_vue_type_style_index_0_lang.mfYrthD4.js": {
-    "file": "js/nav.vue_vue_type_style_index_0_lang.mfYrthD4.js",
+  "_nav.vue_vue_type_style_index_0_lang.CgqDkwuU.js": {
+    "file": "js/nav.vue_vue_type_style_index_0_lang.CgqDkwuU.js",
     "name": "nav.vue_vue_type_style_index_0_lang",
     "imports": [
       "resources/js/app.js"
@@ -14,12 +14,12 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "css/app.BPdW-927.css",
+    "file": "css/app.DnnLSbZq.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "js/app.a5hvPRJG.js",
+    "file": "js/app.BcNHutI5.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -30,49 +30,49 @@
     ],
     "css": [
       "css/app.CSXic_Zd.css",
-      "css/app.BPdW-927.css"
+      "css/app.DnnLSbZq.css"
     ]
   },
   "resources/js/vue/Pages/Stream.vue": {
-    "file": "js/Stream.BI79kBvV.js",
+    "file": "js/Stream.DF9QqqIm.js",
     "name": "Stream",
     "src": "resources/js/vue/Pages/Stream.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.mfYrthD4.js",
+      "_nav.vue_vue_type_style_index_0_lang.CgqDkwuU.js",
       "resources/js/app.js"
     ],
     "css": [
       "css/Stream.svI7lQbf.css",
-      "css/app.BPdW-927.css"
+      "css/app.DnnLSbZq.css"
     ]
   },
   "resources/js/vue/Pages/Streams.vue": {
-    "file": "js/Streams.qoe-9VCs.js",
+    "file": "js/Streams.C2Y1--Xv.js",
     "name": "Streams",
     "src": "resources/js/vue/Pages/Streams.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.mfYrthD4.js",
+      "_nav.vue_vue_type_style_index_0_lang.CgqDkwuU.js",
       "resources/js/app.js"
     ],
     "css": [
       "css/Streams.CBbH4t62.css",
-      "css/app.BPdW-927.css"
+      "css/app.DnnLSbZq.css"
     ]
   },
   "resources/js/vue/Pages/Welcome.vue": {
-    "file": "js/Welcome.DK4JF3tS.js",
+    "file": "js/Welcome.Bog3ZXNb.js",
     "name": "Welcome",
     "src": "resources/js/vue/Pages/Welcome.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.mfYrthD4.js",
+      "_nav.vue_vue_type_style_index_0_lang.CgqDkwuU.js",
       "resources/js/app.js"
     ],
     "css": [
-      "css/Welcome.BuNpZcku.css",
-      "css/app.BPdW-927.css"
+      "css/Welcome.Ds5qC4e6.css",
+      "css/app.DnnLSbZq.css"
     ]
   }
 }
