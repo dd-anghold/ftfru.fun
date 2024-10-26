@@ -11,22 +11,34 @@
     transition: ease-in-out padding 0.3s;
 }
 
-.content > main.main-container--fullheight {
+.content>main.main-container--fullheight {
     height: calc(100vh - 2 * 3rem);
 }
-.content > main {
+
+.content>main {
     box-sizing: border-box;
     grid-area: main;
     min-width: 0;
 }
+
 .bots-overview {
     display: grid;
     grid-gap: 1rem;
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content;
 }
+
 .main-container {
     height: 100%;
     overflow: auto;
     padding: 1em;
+}
+
+.overview__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+i .overview__title {
+    font-weight: 700;
 }

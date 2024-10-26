@@ -12,19 +12,20 @@ const Check = ref(false);
 // Function to fetch data
 const fetchData = async () => {
     try {
-        const response = await fetch('http://80.87.201.211:8081/v1/vhosts/default/apps/app/streams', {
+        const response = await fetch('/streamapi/', {
             method: 'GET',
             headers: {
                 'Authorization': `Basic ${token}`,
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*' // Add CORS header
+                'Accept': 'application/json'
             },
             mode: 'cors' // Explicitly set CORS mode
         });
+
         // Check if the response is successful
         if (!response.ok) {
             throw new Error('HTTP error ' + response.status);
         }
+
         const data = await response.json(); // Parse the JSON response
         responseData.value = data.response || {}; // Ensure it's an object
         Check.value = true;
@@ -32,6 +33,7 @@ const fetchData = async () => {
         console.error('Error:', error);
     }
 };
+
 
 // Fetch data on component mount
 onMounted(() => {
@@ -53,10 +55,10 @@ onMounted(() => {
     </Head>
     <section class="content">
         <main class="main-container main-container--fullheight bots-overview">
-            <h1>Активность стримов</h1>
+            <h1 class="overview__title">Активность стримов</h1>
             <div class="Streams" v-if="Check">
                 <template v-if="Object.keys(responseData).length === 0">
-                    <h1>Стримов нет</h1>
+                    <i><h1 class="overview__title">Стримов нет</h1></i>
                 </template>
                 <template v-else-if="Object.keys(responseData).length > 0">
                     <template v-for="id in responseData">
@@ -72,11 +74,6 @@ onMounted(() => {
 
 
 <style lang="css">
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
 .Streams {
     display: grid;
     grid-gap: 1em;

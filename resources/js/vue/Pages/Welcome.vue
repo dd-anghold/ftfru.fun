@@ -10,7 +10,7 @@ const playerData = ref([]);
 // Функция для получения данных игрока
 const fetchPlayerData = async () => {
     try {
-        const response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=39EA90A863FC233C9868C29FF3591B68&steamids=${usePage().props.playerData}`, {
+        const response = await fetch(`/steamapi/ISteamUser/GetPlayerSummaries/v0002/?key=39EA90A863FC233C9868C29FF3591B68&steamids=${usePage().props.playerData}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -83,7 +83,7 @@ const getStatusTextEng = (status) => {
     </Head>
     <section class="content">
         <main class="main-container main-container--fullheight bots-overview">
-            <h1>Активность стима</h1>
+            <h1 class="overview__title">Активность стима</h1>
             <div class="bots">
                 <template v-for="player in playerData" :key="player.steamid"> <!-- Добавляем key для элементов -->
                     <a :href="'https://steamcommunity.com/profiles/' + player.steamid" target="_blank">
@@ -113,11 +113,6 @@ const getStatusTextEng = (status) => {
 </template>
 
 <style lang="scss">
-/* Ваши стили остаются без изменений */
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
 
 .bots {
     display: grid;
