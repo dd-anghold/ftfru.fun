@@ -59,7 +59,6 @@ const fetchData = async () => {
 
         const data = await response.json(); // Parse the JSON response
         responseData.value = data.response || {}; // Ensure it's an object
-        Check.value = true;
     } catch (error) {
         console.error('Error:', error);
     }
@@ -173,7 +172,7 @@ const getStatusTextEng = (status) => {
         grid-area: buttons;
         justify-content: space-around;
         font-size: 1.5em;
-        color: rgb(30, 48, 80);
+        color: rgb(80, 132, 223);
     }
 
     .bot {
