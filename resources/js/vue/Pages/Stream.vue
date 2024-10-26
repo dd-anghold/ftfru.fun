@@ -16,7 +16,7 @@ const playerConfig = {
     sources: [
         {
             "type": "webrtc",
-            "file": "wss://ftfru.fun/app/" + usePage().props.streamid
+            "file": "/app/" + usePage().props.streamid
         },
     ],
 }
