@@ -1,7 +1,28 @@
 <script setup lang="jsx">
+import { onMounted, onBeforeUnmount } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
+function toggleNavigationClass() {
+    const appElement = document.querySelector('.app');
+    if (window.matchMedia('screen and (max-width: 500px)').matches) {
+        appElement.classList.add('app--small-navigation');
+    } else {
+        appElement.classList.remove('app--small-navigation');
+    }
+}
 
+onMounted(() => {
+    // Initial check
+    toggleNavigationClass();
+
+    // Add event listener for resize
+    window.addEventListener('resize', toggleNavigationClass);
+});
+
+onBeforeUnmount(() => {
+    // Clean up event listener on component unmount
+    window.removeEventListener('resize', toggleNavigationClass);
+});
 </script>
 <template>
     <nav class="side-navigation">
@@ -77,5 +98,31 @@ import { Link } from '@inertiajs/vue3';
     height: 1em;
     margin-right: 0.5em;
     vertical-align: -0.125em;
+}
+
+.app--small-navigation .side-navigation {
+    overflow: initial;
+    width: 3rem;
+}
+
+.app--small-navigation .navigation-link {
+    padding: .95em 0;
+}
+
+.app--small-navigation .navigation-link .navigation-link__name {
+    display: none;
+}
+
+.app--small-navigation .navigation-link .navigation-link__icon {
+    display: inline-flex;
+    width: 3rem;
+}
+
+.app--small-navigation .navigation-link .navigation-link__icon>i {
+    margin: 0 auto;
+}
+
+.app--small-navigation .navigation-category__title {
+    display: none;
 }
 </style>
