@@ -1,18 +1,15 @@
 <?php
 
 namespace App\Orchid\Screens\ids;
+
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule; // Добавлено для проверки уникальности
 use Orchid\Screen\Screen;
-
 use Orchid\Screen\Actions\Button;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
 use App\Models\ids;
-
 use App\Orchid\Layouts\ids\idsEditLayout;
-
-
 
 class idsEditScreen extends Screen
 {
@@ -78,17 +75,31 @@ class idsEditScreen extends Screen
 
     public function save(Request $request, ids $ids)
     {
-
-        $ids->fill($request->get('ids'));
-
+        $validatedData = $request->validate([
+            'ids.streamid' => [
+                'required',
+                Rule::unique(ids::class, 'streamid')->ignore($ids->id),
+            ],
+            'ids.steamid' => [
+                'required',
+                Rule::unique(ids::class, 'steamid')->ignore($ids->id),
+            ],
+        ]);
+    
+        // Заполняем данные для модели
+        $ids->fill([
+            'streamid' => $validatedData['ids']['streamid'],
+            'steamid' => $validatedData['ids']['steamid'],
+        ]);
+    
         $ids->save();
-
+    
         Toast::info(__('Role was saved'));
-
+    
         return redirect()->route('platform.systems.ids');
     }
 
-        /**
+    /**
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse

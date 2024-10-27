@@ -1,13 +1,64 @@
 <script setup lang="jsx">
-import navigation from '../Layout/nav.vue'
-
-import OvenPlayerVue3 from "ovenplayer-vue3";
+import navigation from '../Layout/nav.vue';
+import { ref } from 'vue';
+import OvenPlayerVue3 from 'ovenplayer-vue3';
 import { Head, usePage } from '@inertiajs/vue3';
 
-const readyHandler = function (event) {
-}
-const errorHandler = function (event) {
-}
+const username = 'root';
+const password = '02092506dD';
+const token = btoa(`${username}:${password}`);
+const responseData = ref({});
+const streamid = ref(''); 
+const readyHandler = function (event) {}
+const errorHandler = function (event) {}
+
+const fetchData = () => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/streamapi/', false); 
+    xhr.setRequestHeader('Authorization', `Basic ${token}`);
+    xhr.setRequestHeader('Accept', 'application/json');
+    
+    try {
+        xhr.send();
+
+        if (xhr.status !== 200) {
+            throw new Error('HTTP error ' + xhr.status);
+        }
+
+        const data = JSON.parse(xhr.responseText); 
+
+        const convertToLowercase = (obj) => {
+            if (typeof obj === 'string') {
+                return obj.toLowerCase();
+            } else if (Array.isArray(obj)) {
+                return obj.map(convertToLowercase);
+            } else if (obj && typeof obj === 'object') {
+                return Object.keys(obj).reduce((acc, key) => {
+                    acc[key] = convertToLowercase(obj[key]);
+                    return acc;
+                }, {});
+            }
+            return obj;
+        };
+
+        responseData.value = data.response;
+
+        const pageStreamId = usePage().props.streamid.toLowerCase();
+        for (const item of Object.values(responseData.value)) {
+         
+            if (typeof item === 'string' && item.toLowerCase() === pageStreamId) {
+                streamid.value = item; 
+                break; 
+            }
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
+// Call fetchData when the component mounts or when needed
+fetchData();
 
 const playerConfig = {
     autoStart: true,
@@ -16,12 +67,12 @@ const playerConfig = {
     sources: [
         {
             "type": "webrtc",
-            "file": "/app/" + usePage().props.streamid
+            "file": "wss:ftfru.fun/app/" + streamid.value // Use the original streamid
         },
     ],
 }
-
 </script>
+
 <template>
 
     <Head>

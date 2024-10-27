@@ -3,8 +3,7 @@
     display: grid;
     grid-template-rows: 1fr auto;
     grid-template-areas:
-        "main"
-        "footer";
+        "main";
     min-height: 100vh;
     padding-left: 11rem;
     position: relative;
@@ -16,7 +15,6 @@
         padding-left: 3rem;
     }
 }
-
 .content>main {
     box-sizing: border-box;
     grid-area: main;

@@ -25,15 +25,15 @@ class idsListLayout extends Table
     public function columns(): array
     {
         return [
-            TD::make('id', __('id'))
-                ->sort()
-                ->render(fn (ids $ids) => Link::make($ids->id)
-                    ->route('platform.systems.ids.edit', $ids->id)),
-
-            TD::make('steamid', __('Steam ID'))
+            TD::make('id', __('ID'))
                 ->sort(),
 
             TD::make('streamid', __('Stream ID'))
+                ->sort()
+                ->render(fn(ids $ids) => Link::make($ids->streamid)
+                    ->route('platform.systems.ids.edit', $ids->id)),
+
+            TD::make('steamid', __('Steam ID'))
                 ->sort(),
 
             TD::make('updated_at', __('Last edit'))

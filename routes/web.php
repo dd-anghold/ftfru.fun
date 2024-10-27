@@ -10,12 +10,13 @@ use App\Models\ids;
 
 Route::get('/', function () {
     $apiKey = '39EA90A863FC233C9868C29FF3591B68';
-    $steamId = ids::get('steamid')->pluck('steamid')->implode(','); // Предполагая, что 'steamid' - это поле
-
+    $steamId = ids::orderBy('id', 'ASC')->get('steamid')->pluck('steamid')->implode(',');
+    $streamIds = ids::orderBy('id', 'ASC')->pluck('streamid')->toArray();
     return Inertia::render('Welcome', [
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'playerData' => $steamId,
+        'streamIds' => $streamIds
     ]);
 })->name('index');
 
@@ -30,6 +31,6 @@ Route::get('/streams', function (Request $Request) {
     $streamid = ids::get('streamid');
 
     return Inertia::render('Streams', [
-        'streamid' => $streamid
+        'streamid' => $streamid,
     ]);
 })->name('streams');

@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 
 function toggleNavigationClass() {
     const appElement = document.querySelector('.app');
-    if (window.matchMedia('screen and (max-width: 500px)').matches) {
+    if (window.matchMedia('screen and (max-width: 700px)').matches) {
         appElement.classList.add('app--small-navigation');
     } else {
         appElement.classList.remove('app--small-navigation');

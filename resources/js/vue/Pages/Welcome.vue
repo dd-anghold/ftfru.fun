@@ -36,10 +36,19 @@ const fetchPlayerData = async () => {
             return indexA - indexB; // Сравниваем индексы для сортировки
         });
 
+        // Встраиваем данные из usePage().props.streamIds в соответствующие объекты playerData
+        let streamIds = usePage().props.streamIds; // Получаем строку
+        streamIds = streamIds.map(id => id.toLowerCase()); 
+
+        playerData.value = playerData.value.map((player, index) => ({
+            ...player,
+            streamid: streamIds[index] || player.steamid
+        }));
     } catch (error) {
         console.error('Error:', error);
     }
 };
+
 
 const fetchData = async () => {
     try {
@@ -58,7 +67,23 @@ const fetchData = async () => {
         }
 
         const data = await response.json(); // Parse the JSON response
-        responseData.value = data.response || {}; // Ensure it's an object
+
+        // Convert all string values in data.response to lowercase
+        const convertToLowercase = (obj) => {
+            if (typeof obj === 'string') {
+                return obj.toLowerCase();
+            } else if (Array.isArray(obj)) {
+                return obj.map(convertToLowercase);
+            } else if (obj && typeof obj === 'object') {
+                return Object.keys(obj).reduce((acc, key) => {
+                    acc[key] = convertToLowercase(obj[key]);
+                    return acc;
+                }, {});
+            }
+            return obj;
+        };
+
+        responseData.value = convertToLowercase(data.response || {});
     } catch (error) {
         console.error('Error:', error);
     }
@@ -110,12 +135,11 @@ const getStatusTextEng = (status) => {
 <template>
 
     <Head>
-        <title>Актив стима</title>
+        <title>Актив</title>
     </Head>
     <section class="content">
-
         <main class="main-container main-container--fullheight bots-overview">
-            <h1 class="overview__title">Активность стима</h1>
+            <h1 class="overview__title">Активность</h1>
             <div class="bots">
                 <template v-for="player in playerData" :key="player.steamid"> <!-- Добавляем key для элементов -->
                     <a :href="'https://steamcommunity.com/profiles/' + player.steamid" target="_blank">
@@ -135,8 +159,14 @@ const getStatusTextEng = (status) => {
                                 </span>
                             </div>
                             <div class="stream_action">
-                                <template v-if="Object.values(responseData).includes(player.steamid)">
+                                <template
+                                    v-if="Object.values(responseData).includes(player.steamid)">
                                     <Link :href="route('stream', player.steamid)">
+                                    <i class="fa-solid fa-play"></i>
+                                    </Link>
+                                </template>
+                                <template v-else-if="Object.values(responseData).includes(player.streamid)">
+                                    <Link :href="route('stream', player.streamid)">
                                     <i class="fa-solid fa-play"></i>
                                     </Link>
                                 </template>
