@@ -355,18 +355,44 @@ class TypesenseEngine extends Engine
     protected function filters(Builder $builder): string
     {
         $whereFilter = collect($builder->wheres)
-            ->map(fn ($value, $key) => $this->parseWhereFilter($value, $key))
+            ->map(fn ($value, $key) => $this->parseWhereFilter($this->parseFilterValue($value), $key))
             ->values()
             ->implode(' && ');
 
         $whereInFilter = collect($builder->whereIns)
-            ->map(fn ($value, $key) => $this->parseWhereInFilter($value, $key))
+            ->map(fn ($value, $key) => $this->parseWhereInFilter($this->parseFilterValue($value), $key))
             ->values()
             ->implode(' && ');
 
-        return $whereFilter.(
-            ($whereFilter !== '' && $whereInFilter !== '') ? ' && ' : ''
-        ).$whereInFilter;
+        $whereNotInFilter = collect($builder->whereNotIns)
+            ->map(fn ($value, $key) => $this->parseWhereNotInFilter($this->parseFilterValue($value), $key))
+            ->values()
+            ->implode(' && ');
+
+        $filters = collect([$whereFilter, $whereInFilter, $whereNotInFilter])
+            ->filter()
+            ->implode(' && ');
+
+        return $filters;
+    }
+
+    /**
+     * Parse the given filter value.
+     *
+     * @param  array|string|bool|int|float  $value
+     * @return array|bool|float|int|string
+     */
+    protected function parseFilterValue(array|string|bool|int|float $value)
+    {
+        if (is_array($value)) {
+            return array_map([$this, 'parseFilterValue'], $value);
+        }
+
+        if (gettype($value) == 'boolean') {
+            return $value ? 'true' : 'false';
+        }
+
+        return $value;
     }
 
     /**
@@ -392,7 +418,19 @@ class TypesenseEngine extends Engine
      */
     protected function parseWhereInFilter(array $value, string $key): string
     {
-        return sprintf('%s:=%s', $key, '['.implode(', ', $value).']');
+        return sprintf('%s:=[%s]', $key, implode(', ', $value));
+    }
+
+    /**
+     * Create a "where not in" filter string.
+     *
+     * @param  array|string  $value
+     * @param  string  $key
+     * @return string
+     */
+    protected function parseWhereNotInFilter(array $value, string $key): string
+    {
+        return sprintf('%s:!=[%s]', $key, implode(', ', $value));
     }
 
     /**

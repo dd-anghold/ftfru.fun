@@ -5,15 +5,9 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy";
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
-
 import NProgress from "nprogress";
 import { InertiaProgress } from "@inertiajs/progress";
 import "nprogress/nprogress.css";
-
-const appName = import.meta.env.VITE_APP_NAME || "Guitar World";
 
 // Initialize Inertia progress with NProgress
 InertiaProgress.init({
@@ -25,9 +19,6 @@ InertiaProgress.init({
 function isMobileDevice() {
     return window.innerWidth < 768;
 }
-
-const mobilePages = import.meta.glob("./Pages/mobile/**/*.vue");
-const desktopPages = import.meta.glob("./Pages/desktop/**/*.vue");
 
 createInertiaApp({
     title: (title) => `${title}`,

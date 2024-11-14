@@ -8,16 +8,16 @@ const username = 'root';
 const password = '02092506dD';
 const token = btoa(`${username}:${password}`);
 const responseData = ref({});
-const streamid = ref(''); 
-const readyHandler = function (event) {}
-const errorHandler = function (event) {}
+const streamid = ref('');
+const readyHandler = function (event) { }
+const errorHandler = function (event) { }
 
 const fetchData = () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', '/streamapi/', false); 
+    xhr.open('GET', 'https://ftfru.fun/streamapi/', false);
     xhr.setRequestHeader('Authorization', `Basic ${token}`);
     xhr.setRequestHeader('Accept', 'application/json');
-    
+
     try {
         xhr.send();
 
@@ -25,7 +25,7 @@ const fetchData = () => {
             throw new Error('HTTP error ' + xhr.status);
         }
 
-        const data = JSON.parse(xhr.responseText); 
+        const data = JSON.parse(xhr.responseText);
 
         const convertToLowercase = (obj) => {
             if (typeof obj === 'string') {
@@ -45,10 +45,10 @@ const fetchData = () => {
 
         const pageStreamId = usePage().props.streamid.toLowerCase();
         for (const item of Object.values(responseData.value)) {
-         
+
             if (typeof item === 'string' && item.toLowerCase() === pageStreamId) {
-                streamid.value = item; 
-                break; 
+                streamid.value = item;
+                break;
             }
         }
 
@@ -60,14 +60,16 @@ const fetchData = () => {
 // Call fetchData when the component mounts or when needed
 fetchData();
 
+// Start of Selection
 const playerConfig = {
     autoStart: true,
     autoFallback: true,
     mute: false,
+    p2p: true, // Enable P2P to reduce server load
     sources: [
         {
             "type": "webrtc",
-            "file": "wss:ftfru.fun/app/" + streamid.value // Use the original streamid
+            "file": "wss:ftfru.fun/app/" + streamid.value// Use the original streamid
         },
     ],
 }

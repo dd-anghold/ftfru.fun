@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Title -->
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <!-- Fonts -->
 

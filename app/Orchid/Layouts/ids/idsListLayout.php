@@ -33,6 +33,9 @@ class idsListLayout extends Table
                 ->render(fn(ids $ids) => Link::make($ids->streamid)
                     ->route('platform.systems.ids.edit', $ids->id)),
 
+            TD::make('teamspeakid', __('TeamSpeak ID'))
+                ->sort(),
+
             TD::make('steamid', __('Steam ID'))
                 ->sort(),
 

@@ -5,13 +5,59 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 14.43.1 - 2024-11-09
+
+### Changed
+- Improve performance for simple model attribute [#2921](https://github.com/orchidsoftware/platform/pull/2921)
+
+## 14.43.0 - 2024-11-06
+
+### Added
+- Additional configuration parameters for Hotwire by default
+
+### Changed
+- The loading of modal windows in the browser has been redesigned. Now, upon invalidation, modal windows, including deferred ones, will automatically open.
+- Installed Psalm to run exclusively on GitHub Actions.
+- Set types to `static` in `Field`.
+
+### Fixed
+- Incorrect listeners names
+
+### Removed
+- Unused option when running PHPUnit
+
+## 14.42.0 - 2024-11-01
+
+### Changed
+- Restrict excessively long URLs in modal windows [#2917](https://github.com/orchidsoftware/platform/issues/2917)
+
+## 14.41.0 - 2024-10-29
+
+### Added
+- Template for grid columns on `Group` [#2913](https://github.com/orchidsoftware/platform/pull/2913)
+
+## 14.40.0 - 2024-10-28
+
+### Changed
+- Max and min width for sidebar 
+
+## 14.39.0 - 2024-10-24
+
+### Changed
+- Color favicon to monochrome
+- Improve install examples
+- Added `text-balance` for "Welcome Page"
+- Width for login form (large breakpoint)
+- Increment root font-size
+- Improve color on active item menu
+
 ## 14.38.0 - 2024-10-23
 
 ### Added
-- Padding for items `Selection`
 - `addClass()` method to `Field` class for easier class manipulation [#2909](https://github.com/orchidsoftware/platform/pull/2909)
 
 ### Changed
+- Padding for items `Selection`
 - Remove `memory_limit` for check max size upload [#2910](https://github.com/orchidsoftware/platform/issues/2910)
 
 ## 14.37.0 - 2024-10-12

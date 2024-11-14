@@ -29,7 +29,7 @@ onBeforeUnmount(() => {
         <div class="navigation-category">
             <div class="navigation-category__title"><span>Control</span></div>
             <Link :href="route('index')"
-                class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
+                class="navigation-link navigation-link--default"
                 data-inertia="true">
             <span class="navigation-link__icon">
                 <i class="fa-solid fa-window-restore"></i>
@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
             <span class="navigation-link__name">Активность</span>
             </Link>
             <!-- <Link :href="route('streams')"
-                class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
+                class="navigation-link navigation-link--default"
                 data-inertia="true">
             <span class="navigation-link__icon">
                 <i class="fa-solid fa-video"></i>
@@ -45,17 +45,25 @@ onBeforeUnmount(() => {
             <span class="navigation-link__name">Stream</span>
             </Link> -->
             <a href="https://admin.ftfru.fun"
-                class="navigation-link router-link-exact-active navigation-link--active navigation-link--default"
+                class="navigation-link navigation-link--default"
                 data-inertia="true">
                 <span class="navigation-link__icon">
-                    <i class="fa-solid fa-user-tie"></i>
+                    <i class="fa-solid fa-database"></i>
+                </span>
+                <span class="navigation-link__name">DB Panel</span>
+            </a>
+            <a href="https://ftfru.fun/admin"
+                class="navigation-link navigation-link--default"
+                data-inertia="true">
+                <span class="navigation-link__icon">
+                    <i class="fa-solid fa-toolbox"></i>
                 </span>
                 <span class="navigation-link__name">Admin</span>
             </a>
         </div>
     </nav>
 </template>
-<style lang="css">
+<style lang="scss">
 .side-navigation {
     background: #222d32;
     bottom: 0;

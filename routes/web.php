@@ -1,18 +1,16 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use App\Http\Controllers\TeamspeakController;
 use App\Models\ids;
 
 Route::get('/', function () {
-    $apiKey = '39EA90A863FC233C9868C29FF3591B68';
     $steamId = ids::orderBy('id', 'ASC')->get('steamid')->pluck('steamid')->implode(',');
     $streamIds = ids::orderBy('id', 'ASC')->pluck('streamid')->toArray();
-    return Inertia::render('Welcome', [
+    return Inertia::render('Index', [
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
         'playerData' => $steamId,
@@ -21,7 +19,7 @@ Route::get('/', function () {
 })->name('index');
 
 
-Route::get('/stream/{streamid}', function (Request $Request) {
+Route::get('/streams/{streamid}', function (Request $Request) {
     return Inertia::render('Stream', [
         'streamid' => $Request->streamid
     ]);
@@ -34,3 +32,15 @@ Route::get('/streams', function (Request $Request) {
         'streamid' => $streamid,
     ]);
 })->name('streams');
+
+Route::get('/teamspeak/online-users', [TeamspeakController::class, 'getChannelsAndUsers'])->name('getChannelsAndUsers');
+Route::get('/teamspeak/channels', [TeamSpeakController::class, 'getChannels'])->name('getChannels');
+Route::get('/teamspeak/clients', [TeamSpeakController::class, 'getClients'])->name('getClients');
+
+Route::get('/teamspeak/list', function () {
+    return Inertia::render('TeamSpeakList');
+})->name('teamspeakList');
+
+Route::get('/teamspeak', function () {
+    return Inertia::render('TeamSpeak');
+})->name('teamspeak');

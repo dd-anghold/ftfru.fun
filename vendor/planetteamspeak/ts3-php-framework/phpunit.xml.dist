@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false"
+
+<phpunit backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -7,29 +8,30 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         syntaxCheck="false"
+         bootstrap="tests/bootstrap.php"
 >
-  <coverage>
-    <include>
-      <directory>./</directory>
-    </include>
-    <exclude>
-      <directory>./images</directory>
-      <directory>./public</directory>
-      <directory>./tests</directory>
-      <directory>./build</directory>
-      <directory>./vendor</directory>
-    </exclude>
-    <report>
-      <clover outputFile="build/logs/clover.xml"/>
-    </report>
-  </coverage>
   <testsuites>
     <testsuite name="Teamspeak 3 PHP Framework Test Suite">
       <directory>./tests/</directory>
     </testsuite>
   </testsuites>
+
   <logging>
-    <junit outputFile="build/logs/junit.xml"/>
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+    <log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false"/>
   </logging>
+
+  <filter>
+    <whitelist>
+      <directory>./</directory>
+      <exclude>
+        <directory>./images</directory>
+        <directory>./public</directory>
+        <directory>./tests</directory>
+        <directory>./build</directory>
+        <directory>./vendor</directory>
+      </exclude>
+    </whitelist>
+  </filter>
 </phpunit>

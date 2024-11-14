@@ -32,7 +32,6 @@ return array(
     '493c6aea52f6009bab023b26c21a386a' => $vendorDir . '/laravel/framework/src/Illuminate/Support/functions.php',
     '58571171fd5812e6e447dce228f52f4d' => $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-    'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     '801c31d8ed748cfa537fa45402288c95' => $vendorDir . '/psy/psysh/src/functions.php',
     '86ade239cbe8025aa999b5c6eb117f17' => $vendorDir . '/watson/active/src/helpers.php',
     '98caa11a197f6516a8e48aa4abb5ccc6' => $vendorDir . '/inertiajs/inertia-laravel/helpers.php',
@@ -41,4 +40,5 @@ return array(
     'a1cfe24d14977df6878b9bf804af2d1c' => $vendorDir . '/nunomaduro/collision/src/Adapters/Phpunit/Autoload.php',
     'fd4bcb0bca65a7921baebcc77d3f2daf' => $vendorDir . '/orchid/platform/src/Support/helpers.php',
     'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+    'ab8202fdaa7689cd9dcdacf8c6fba20d' => $vendorDir . '/planetteamspeak/ts3-php-framework/libraries/TeamSpeak3/TeamSpeak3.php',
 );
