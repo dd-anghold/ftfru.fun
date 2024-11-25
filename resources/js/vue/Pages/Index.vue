@@ -1,58 +1,61 @@
 <script setup lang="jsx">
-import navigation from '../Layout/nav.vue'
+import navigation from '../Layout/nav.vue';
 
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { usePage, Head, Link } from '@inertiajs/vue3';
 
-// Определяем реактивное свойство playerData
+// Определяем реактивные свойства
 const playerData = ref([]);
+const responseData = ref({});
+const usersAndChannels = ref([]); // Данные о пользователях и каналах
+
+// Для авторизации
 const username = 'root';
 const password = '02092506dD';
 const token = btoa(`${username}:${password}`);
-const responseData = ref({});
 
-// Функция для получения данных игрока
+// Функция для получения данных игроков
 const fetchPlayerData = async () => {
     try {
-        const response = await fetch(`https://ftfru.fun/steamapi/ISteamUser/GetPlayerSummaries/v0002/?key=39EA90A863FC233C9868C29FF3591B68&steamids=${usePage().props.playerData}`, {
+        const response = await fetch(`https://ftfru.fun/steam-api/ISteamUser/GetPlayerSummaries/v0002/?key=5775462EC5EBC648147BAD6A9809D128&steamids=${usePage().props.playerData}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
             },
         });
 
-        // Проверяем, успешен ли ответ
         if (!response.ok) {
             throw new Error('HTTP error ' + response.status);
         }
-        const data = await response.json(); // Преобразуем ответ в JSON
-        playerData.value = data.response.players; // Сохраняем данные игроков в реактивное свойство
+        const data = await response.json();
+        playerData.value = data.response.players;
 
-        // Сортируем players по порядку steamid из usePage().props.playerData
-        const steamIdsOrder = usePage().props.playerData.split(','); // Преобразуем строку в массив
+        // Сортируем players по steamid
+        const steamIdsOrder = usePage().props.playerData.split(',');
         playerData.value.sort((a, b) => {
             const indexA = steamIdsOrder.indexOf(a.steamid);
             const indexB = steamIdsOrder.indexOf(b.steamid);
-            return indexA - indexB; // Сравниваем индексы для сортировки
+            return indexA - indexB;
         });
 
-        // Встраиваем данные из usePage().props.streamIds в соответствующие объекты playerData
-        let streamIds = usePage().props.streamIds; // Получаем строку
-        streamIds = streamIds.map(id => id.toLowerCase());
+        // Обновляем данные для playerData, включая streamId и teamspeakId
+        let streamIds = usePage().props.streamIds.map(id => id.toLowerCase());
+        let teamspeakid = usePage().props.teamspeakid;
 
         playerData.value = playerData.value.map((player, index) => ({
             ...player,
-            streamid: streamIds[index] || player.steamid
+            streamid: streamIds[index] || player.steamid,
+            teamspeakid: teamspeakid[index] || null,
         }));
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching player data:', error);
     }
 };
 
-
+// Функция для получения данных о стримах через WebSocket
 const fetchData = async () => {
     try {
-        const response = await fetch('https://ftfru.fun/streamapi/', {
+        const response = await fetch('https://stream.ftfru.fun/api/default/apps/app/streams', {
             method: 'GET',
             headers: {
                 'Authorization': `Basic ${token}`,
@@ -88,18 +91,42 @@ const fetchData = async () => {
         console.error('Error:', error);
     }
 };
+// Функция для получения данных о пользователях и каналах
+const fetchUsersAndChannels = async () => {
+    try {
+        const response = await fetch('https://ftfru.fun/teamspeak/users-with-channels', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
 
+        if (!response.ok) {
+            throw new Error('HTTP error ' + response.status);
+        }
 
-// Получаем данные игрока при монтировании компонента
+        const data = await response.json();
+        usersAndChannels.value = data; // Сохраняем данные о пользователях и их каналах
+    } catch (error) {
+        console.error('Error fetching users and channels:', error);
+    }
+};
+
+// Запросы и интервалы обновления данных
 onMounted(() => {
-    fetchPlayerData(); // Первоначальная загрузка данных
-    fetchData();
-    const intervalId = setInterval(fetchPlayerData, 7500);
-    const streamInfo = setInterval(fetchData, 7500);
+    fetchPlayerData(); // Первоначальная загрузка данных игроков
+    fetchData(); // Первоначальная загрузка данных стримов
+    fetchUsersAndChannels(); // Первоначальная загрузка данных пользователей и каналов
 
+    const playerDataInterval = setInterval(fetchPlayerData, 7500);
+    const streamDataInterval = setInterval(fetchData, 7500);
+    const usersAndChannelsInterval = setInterval(fetchUsersAndChannels, 7500);
+
+    // Очистка интервалов перед размонтированием компонента
     onBeforeUnmount(() => {
-        clearInterval(intervalId);
-        clearInterval(streamInfo);
+        clearInterval(playerDataInterval);
+        clearInterval(streamDataInterval);
+        clearInterval(usersAndChannelsInterval);
     });
 });
 
@@ -129,34 +156,58 @@ const getStatusTextEng = (status) => {
         default: return 'Unknown status';
     }
 };
+
+const getStatusTextEngStatus = (status) => {
+    switch (status) {
+        case 0: return 'Offline';
+        case 1: return 'Online';
+        case 2: return 'Busy';
+        case 3: return 'Away';
+        case 4: return 'Do-not-disturb';
+        case 5: return 'Looking-for-trade';
+        case 6: return 'Looking-for-game';
+        default: return 'Unknown status';
+    }
+};
 </script>
+
 
 <template>
 
     <Head>
-        <title>Актив</title>
+        <title>Activity</title>
     </Head>
     <section class="content">
-        <main class="main-container main-container--fullheight bots-overview">
-            <h1 class="overview__title">Активность</h1>
+        <main class="main-container">
+            <h1 class="overview__title">Activity</h1>
             <div class="bots">
-                <template v-for="player in playerData" :key="player.steamid"> <!-- Добавляем key для элементов -->
-
-                    <div class="bot" :class="`status--${getStatusTextEng(player.personastate).toLowerCase()}`">
+                <template v-for="player, index in playerData" :key="player.steamid">
+                    <!-- Добавляем key для элементов -->
+                    <div class="bot" :class="`status--${getStatusTextEngStatus(player.personastate).toLowerCase()}`">
                         <a :href="'https://steamcommunity.com/profiles/' + player.steamid" target="_blank">
                             <img :src="player.avatarfull" class="bot__avatar has-tooltip" data-original-title="null">
                         </a>
                         <div class="bot__status">
-                            <a :href="'https://steamcommunity.com/profiles/' + player.steamid" target="_blank">
-                                <span class="bot__status-property bot__status-property--name has-tooltip">
+                            <span class="bot__status-property bot__status-property--name has-tooltip">
+                                <a :href="'https://steamcommunity.com/profiles/' + player.steamid" target="_blank">
                                     {{ player.personaname }}
-                                </span>
-                            </a>
-                            <span class="bot__status-property bot__status-property--text" v-if="!player.gameextrainfo">
-                                {{ getStatusText(player.personastate) }}
+                                </a>
                             </span>
-                            <span class="bot__status-property bot__status-property--text" v-else>
-                                Play in {{ player.gameextrainfo }}
+                            <span class="bot__status-property bot__status-property--text">
+                                <template v-if="!player.gameextrainfo">
+                                    {{ getStatusTextEng(player.personastate) }}
+                                </template>
+                                <template v-else-if="player.gameextrainfo">
+                                    Play in {{ player.gameextrainfo }}
+                                </template>
+                            </span>
+                            <span class="bot__status-property bot__status-property--text">
+                                <template v-if="usersAndChannels[player.teamspeakid]">
+                                    Sits in the channel {{ usersAndChannels[player.teamspeakid] }}
+                                </template>
+                                <template v-else-if="!usersAndChannels[player.teamspeakid]">
+                                    Offline in TS
+                                </template>
                             </span>
                         </div>
                         <div class="stream_action">
@@ -166,7 +217,7 @@ const getStatusTextEng = (status) => {
                                 </Link>
                             </template>
                             <template v-else-if="Object.values(responseData).includes(player.streamid)">
-                                <Link :href="route('stream', player.streamid)">
+                                <Link :href="'/streams/' + player.streamid">
                                 <i class="fa-solid fa-play"></i>
                                 </Link>
                             </template>
@@ -235,6 +286,12 @@ const getStatusTextEng = (status) => {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+
+            a:hover {
+                color: #66C0F4;
+                text-decoration: none;
+                cursor: pointer;
+            }
         }
 
         .bot__status-property--name {
@@ -267,7 +324,7 @@ const getStatusTextEng = (status) => {
 }
 
 /* Оранжевый */
-.status--busy {
+.status--do-not-disturb {
     border-top: 3px solid #ff9800;
 
     .stream_action i:hover {

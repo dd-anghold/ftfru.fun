@@ -32,10 +32,10 @@ class idsEditLayout extends Rows
                 ->title(__('Stream ID'))
                 ->placeholder(__('Stream ID'))
                 ->help(__('Actual name in the system')),
+
             Input::make('ids.teamspeakid')
                 ->type('text')
                 ->max(255)
-                ->required()
                 ->title(__('TeamSpeak ID'))
                 ->placeholder(__('TeamSpeak ID'))
                 ->help(__('Actual name in the system')),

@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
             <span class="navigation-link__icon">
                 <i class="fa-solid fa-window-restore"></i>
             </span>
-            <span class="navigation-link__name">Активность</span>
+            <span class="navigation-link__name">Activity</span>
             </Link>
             <!-- <Link :href="route('streams')"
                 class="navigation-link navigation-link--default"

@@ -1,10 +1,10 @@
 {
-  "_nav.vue_vue_type_style_index_0_lang.!~{008}~.js": {
+  "_nav.vue_vue_type_style_index_0_lang.!~{007}~.js": {
     "file": "css/nav.pL6suw24.css",
-    "src": "_nav.vue_vue_type_style_index_0_lang.!~{008}~.js"
+    "src": "_nav.vue_vue_type_style_index_0_lang.!~{007}~.js"
   },
-  "_nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js": {
-    "file": "js/nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js",
+  "_nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js": {
+    "file": "js/nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js",
     "name": "nav.vue_vue_type_style_index_0_lang",
     "imports": [
       "resources/js/app.js"
@@ -14,12 +14,12 @@
     ]
   },
   "resources/css/app.css": {
-    "file": "css/app.CETS5YqC.css",
+    "file": "css/app.Cv0vqD3P.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "js/app.BKWysc0w.js",
+    "file": "js/app.CdUUK18v.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -27,80 +27,67 @@
       "resources/js/vue/Pages/Index.vue",
       "resources/js/vue/Pages/Stream.vue",
       "resources/js/vue/Pages/Streams.vue",
-      "resources/js/vue/Pages/TeamSpeak.vue",
       "resources/js/vue/Pages/TeamSpeakList.vue"
     ],
     "css": [
       "css/app.CSXic_Zd.css",
-      "css/app.CETS5YqC.css"
+      "css/app.Cv0vqD3P.css"
     ]
   },
   "resources/js/vue/Pages/Index.vue": {
-    "file": "js/Index.BnLBU-8g.js",
+    "file": "js/Index.8-dqzYVe.js",
     "name": "Index",
     "src": "resources/js/vue/Pages/Index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js",
+      "_nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js",
       "resources/js/app.js"
     ],
     "css": [
-      "css/Index.CmZcptcw.css",
-      "css/app.CETS5YqC.css"
+      "css/Index.FMQtqUcr.css",
+      "css/app.Cv0vqD3P.css"
     ]
   },
   "resources/js/vue/Pages/Stream.vue": {
-    "file": "js/Stream.DG28bWB2.js",
+    "file": "js/Stream.QfUSPDji.js",
     "name": "Stream",
     "src": "resources/js/vue/Pages/Stream.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js",
+      "_nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js",
       "resources/js/app.js"
     ],
     "css": [
       "css/Stream.svI7lQbf.css",
-      "css/app.CETS5YqC.css"
+      "css/app.Cv0vqD3P.css"
     ]
   },
   "resources/js/vue/Pages/Streams.vue": {
-    "file": "js/Streams.BNIkOu43.js",
+    "file": "js/Streams.B-S9ujuQ.js",
     "name": "Streams",
     "src": "resources/js/vue/Pages/Streams.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js",
+      "_nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js",
       "resources/js/app.js"
     ],
     "css": [
       "css/Streams.CBbH4t62.css",
-      "css/app.CETS5YqC.css"
-    ]
-  },
-  "resources/js/vue/Pages/TeamSpeak.vue": {
-    "file": "js/TeamSpeak.BrMZGqjB.js",
-    "name": "TeamSpeak",
-    "src": "resources/js/vue/Pages/TeamSpeak.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "resources/js/app.js"
-    ],
-    "css": [
-      "css/app.CETS5YqC.css"
+      "css/app.Cv0vqD3P.css"
     ]
   },
   "resources/js/vue/Pages/TeamSpeakList.vue": {
-    "file": "js/TeamSpeakList.BIH-qIPW.js",
+    "file": "js/TeamSpeakList.Bfctj_AQ.js",
     "name": "TeamSpeakList",
     "src": "resources/js/vue/Pages/TeamSpeakList.vue",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.js",
-      "_nav.vue_vue_type_style_index_0_lang.CYbq-1Xd.js"
+      "_nav.vue_vue_type_style_index_0_lang.D91Bvcbd.js"
     ],
     "css": [
-      "css/TeamSpeakList.D8BYvTpK.css",
-      "css/app.CETS5YqC.css"
+      "css/TeamSpeakList.D7Uo4FlG.css",
+      "css/app.Cv0vqD3P.css"
     ]
   }
 }

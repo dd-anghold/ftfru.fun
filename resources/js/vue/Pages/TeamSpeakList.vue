@@ -1,6 +1,8 @@
 <script setup lang="jsx">
 import Channel from '../Layout/Channel.vue';
 import navigation from '../Layout/nav.vue';
+
+import { Head } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
@@ -25,11 +27,19 @@ onMounted(() => {
 </script>
 
 <template>
+
+    <Head>
+        <title>
+            TS List
+        </title>
+    </Head>
     <section class="content">
         <main class="main-container main-container--fullheight bots-overview">
             <h1 class="overview__title">TeamSpeak Каналы и Пользователи</h1>
             <div class="bots">
-                <Channel v-for="channel in channels" :key="channel.cid" :channel="channel" />
+                <div class="server-list">
+                    <Channel v-for="channel in channels" :key="channel.cid" :channel="channel" />
+                </div>
             </div>
         </main>
     </section>
@@ -38,10 +48,13 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-.bots {
-    min-height: 0;
-    font-size: 14px;
-    font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+.server-list {
+    max-width: 100%;
+    padding: 10px;
+    *{
+        text-align: center;
+
+    }
 }
 
 .status--online {

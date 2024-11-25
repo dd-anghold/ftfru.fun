@@ -34,11 +34,16 @@ class PlatformProvider extends OrchidServiceProvider
     public function menu(): array
     {
         return [
-            Menu::make('Get Started')
+            Menu::make('Сайт')
+            ->icon('bs.globe2')
+            ->title('Site')
+            ->url('https://ftfru.fun'),
+            
+            Menu::make('Как начать')
                 ->icon('bs.book')
                 ->title('Navigation')
                 ->route(config('platform.index')),
-            Menu::make('IDS')
+            Menu::make("ID'S")
                 ->icon('bs.book')
                 ->route('platform.systems.ids'),
 

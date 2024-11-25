@@ -14,7 +14,6 @@
     <!-- Fonts -->
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/zero.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/assets/css/all.css">
 

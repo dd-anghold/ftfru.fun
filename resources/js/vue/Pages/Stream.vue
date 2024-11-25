@@ -14,7 +14,7 @@ const errorHandler = function (event) { }
 
 const fetchData = () => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://ftfru.fun/streamapi/', false);
+    xhr.open('GET', 'https://stream.ftfru.fun/api/default/apps/app/streams', false);
     xhr.setRequestHeader('Authorization', `Basic ${token}`);
     xhr.setRequestHeader('Accept', 'application/json');
 
@@ -69,7 +69,7 @@ const playerConfig = {
     sources: [
         {
             "type": "webrtc",
-            "file": "wss:ftfru.fun/app/" + streamid.value// Use the original streamid
+            "file": "wss:stream.ftfru.fun/app/" + streamid.value// Use the original streamid
         },
     ],
 }

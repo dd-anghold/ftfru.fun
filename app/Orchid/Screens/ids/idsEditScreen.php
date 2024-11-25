@@ -74,7 +74,7 @@ class idsEditScreen extends Screen
     }
 
     public function save(Request $request, ids $ids)
-    {
+    {   
         $validatedData = $request->validate([
             'ids.streamid' => [
                 'required',
@@ -84,6 +84,9 @@ class idsEditScreen extends Screen
                 'required',
                 Rule::unique(ids::class, 'steamid')->ignore($ids->id),
             ],
+            'ids.teamspeakid' => [
+                Rule::unique(ids::class, 'teamspeakid')->ignore($ids->id),
+            ],
         ]);
     
         // Заполняем данные для модели
@@ -91,10 +94,12 @@ class idsEditScreen extends Screen
             'streamid' => $validatedData['ids']['streamid'],
             'steamid' => $validatedData['ids']['steamid'],
         ]);
-    
+        
+        $ids['teamspeakid']=$validatedData['ids']['teamspeakid'];
+        
         $ids->save();
     
-        Toast::info(__('Role was saved'));
+        Toast::info(__("Id's was saved"));
     
         return redirect()->route('platform.systems.ids');
     }

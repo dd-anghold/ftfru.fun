@@ -12,7 +12,7 @@ const Check = ref(false);
 // Function to fetch data
 const fetchData = async () => {
     try {
-        const response = await fetch('https://ftfru.fun/streamapi/', {
+        const response = await fetch('https://stream.ftfru.fun/api/default/apps/app/streams', {
             method: 'GET',
             headers: {
                 'Authorization': `Basic ${token}`,
